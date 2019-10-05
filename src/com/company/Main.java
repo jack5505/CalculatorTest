@@ -92,6 +92,11 @@ public class Main {
     }
     private static String convertRoman(int n){
         String ans = "";
+        String znaq = "";
+        if(n <= -1){
+            znaq = "-";
+            n *= -1;
+        }
         if (n >= 100){
             n %= 100;
             ans ="C";
@@ -162,6 +167,8 @@ public class Main {
         }
         if(ans.isEmpty())
             return "0";
+        if(!znaq.isEmpty())
+            return "-"+ans;
         return ans;
     }
 
