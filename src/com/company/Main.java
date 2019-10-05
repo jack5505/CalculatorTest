@@ -28,8 +28,10 @@ public class Main {
                     else
                         throw new NotComputedValue("Not computed value");
                 }else {
-                    if(transfer.containsKey(input1) && transfer.containsKey(input2))
+                    if(transfer.containsKey(input1) && transfer.containsKey(input2)){
+                        System.out.println(transfer.get(input1)+" "+transfer.get(input2));
                          System.out.println(convertRoman(result(transfer.get(input1),transfer.get(input2),operation)));
+                    }
                     else
                         throw new NotComputedValue("Not computed value in romans");
                 }
@@ -46,9 +48,12 @@ public class Main {
     }
     private static boolean defineType(String temp){
         boolean yes = true;
+        int pos = 0;
+        if(temp.charAt(0) =='-')
+            pos ++;
         //if roman true
         //else false
-        for(int i = 0 ; i < temp.length();i ++){
+        for(int i = pos ; i < temp.length();i ++){
             yes &= Character.isAlphabetic(temp.charAt(i));
         }
         return yes;
@@ -64,6 +69,16 @@ public class Main {
         transfer.put("VIII",8);
         transfer.put("IX",9);
         transfer.put("X",10);
+        transfer.put("-I",-1);
+        transfer.put("-II",-2);
+        transfer.put("-III",-3);
+        transfer.put("-IV",-4);
+        transfer.put("-V",-5);
+        transfer.put("-VI",-6);
+        transfer.put("-VII",-7);
+        transfer.put("-VIII",-8);
+        transfer.put("-IX",-9);
+        transfer.put("-X",-10);
     }
     private static int result(int a, int b,String op){
         if(op.equals("+"))
@@ -144,7 +159,8 @@ public class Main {
         if(n == 9){
             ans +="IX";
         }
-
+        if(ans.isEmpty())
+            return "0";
         return ans;
     }
 
