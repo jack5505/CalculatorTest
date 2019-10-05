@@ -14,33 +14,34 @@ public class Main {
     public static void main(String[] args) throws IncorrectOperation, NotFitableNumbers, NotComputedValue {
         generate();
         Scanner cin = new Scanner(System.in);
-        input1 = cin.next();
-        operation = cin.next();
-        input2 = cin.next();
-        if(checkOp(operation)){
-            boolean define = defineType(input1);
-            int answer = 0;
-            if(define == defineType(input2)){
-                if(!define)
-                {
-                    if(Integer.parseInt(input1) <= 10 && Integer.parseInt(input2) <= 10)
-                        System.out.println(result(Integer.parseInt(input1),Integer.parseInt(input2),operation));
-                    else
-                        throw new NotComputedValue("Not computed value");
-                }else {
-                    if(transfer.containsKey(input1) && transfer.containsKey(input2)){
-                        System.out.println(transfer.get(input1)+" "+transfer.get(input2));
-                         System.out.println(convertRoman(result(transfer.get(input1),transfer.get(input2),operation)));
+        while (true) {
+            input1 = cin.next();
+            operation = cin.next();
+            input2 = cin.next();
+            if (checkOp(operation)) {
+                boolean define = defineType(input1);
+                int answer = 0;
+                if (define == defineType(input2)) {
+                    if (!define) {
+                        if (Integer.parseInt(input1) <= 10 && Integer.parseInt(input2) <= 10){
+                            System.out.println(result(Integer.parseInt(input1), Integer.parseInt(input2), operation));
+                            continue;
+                        }
+                        else
+                            throw new NotComputedValue("Not computed value");
+                    } else {
+                        if (transfer.containsKey(input1) && transfer.containsKey(input2)) {
+                            System.out.println(convertRoman(result(transfer.get(input1), transfer.get(input2), operation)));
+                            continue;
+                        } else
+                            throw new NotComputedValue("Not computed value in romans");
                     }
-                    else
-                        throw new NotComputedValue("Not computed value in romans");
                 }
-           }
-        }else{
-            throw new IncorrectOperation("Not existed operation");
+            } else {
+                throw new IncorrectOperation("Not existed operation");
+            }
+            throw new NotFitableNumbers("Not one type of number Exception");
         }
-       // throw new NotFitableNumbers("Not one type of number Exception");
-
 
     }
     private  static boolean checkOp(String op){
